@@ -12,9 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('loans', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
+            $table->date('date_start_loan');
+            $table->date('date_end_loan');
+            $table->foreignId('loanStatus_id')->constrained('loan_status')->onDelete('cascade');
             $table->timestamps();
         });
+        
     }
 
     /**
